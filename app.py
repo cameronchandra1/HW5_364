@@ -170,7 +170,10 @@ def update(item):
 # TODO 364: Complete route to delete a whole ToDoList
 @app.route('/delete/<lst>',methods=["GET","POST"])
 def delete(lst):
-    pass # Replace with code
+	db.session.delete(TodoList.query.filter_by(title=lst).first())
+	flash("Deleted list {}".format(lst))
+	return redirect(url_for('all_lists'))
+  
     # This code should successfully delete the appropriate todolist
     # Should flash a message about what was deleted, e.g. Deleted list <title of list>
     # And should redirect the user to the page showing all the todo lists
